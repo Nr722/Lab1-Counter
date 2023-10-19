@@ -97,7 +97,7 @@ We need to do this before we can combine everything to make the executable model
 
 This testbench file is a template for all other testbench files. It consists of various sections, which are mandatory (except for the trace dump section if you don’t want to see the waveforms).  Make sure that you understand what each section is for!
 
-![Testbench](images/counter_tb.jpg)
+  ![Testbench](images/counter_tb.jpg)
 
 **Step 5: Compile the System Verilog model with the testbench** 
 
