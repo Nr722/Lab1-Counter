@@ -24,11 +24,18 @@ int main (int argc, char **argv, char **ev){
     //initialize simulation inputs
     top->clk = 1;
     top->rst = 0;
-    top->en = 1;
-    
+    top->ld = 0;
+    top->v = 100;
     //run simulation for many clock cycles
     for(i=0; i<200;i++){
-
+        
+        vbdSetMode(1);
+        if(vbdFlag()==1){
+            top->ld = 1; 
+        }
+        else{
+            top->ld = 0;
+        }
         //dump variables into VCD file and toggle clock
         for(clk=0; clk<2; clk++){
             tfp-> dump (2*i+clk);
@@ -47,8 +54,8 @@ int main (int argc, char **argv, char **ev){
         //end of Vbuddy output section
 
         //change input stimuli
-        top->en = vbdFlag();
-        if (Verilated::gotFinish()) exit(0);
+
+          if (Verilated::gotFinish()) exit(0);
     }
 
     vbdClose(); //++++
