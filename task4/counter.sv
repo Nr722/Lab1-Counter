@@ -15,3 +15,4 @@ always_ff @ (posedge clk)
 
   else     count <= ld ? count + {{WIDTH-1{1'b0}},1'b1} : count ;
 endmodule
+

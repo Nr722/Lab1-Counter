@@ -2,7 +2,6 @@
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include "vbuddy.cpp"
-#include "Vtop.h"
 
 int main (int argc, char **argv, char **ev){
     int i;
@@ -11,7 +10,7 @@ int main (int argc, char **argv, char **ev){
     Verilated::commandArgs(argc, argv);
     
     //init top verilog instance
-    Vtop* top = new Vtop;
+    Vcounter* top = new Vcounter;
 
     //init trace dump
     Verilated::traceEverOn(true);
@@ -46,10 +45,10 @@ int main (int argc, char **argv, char **ev){
 
         // ++++ send count value to Vbuddy
         vbdPlot(int(top->count), 0, 240);
-        vbdHex(4, (int(top->count) >> 16) & 0xF);
+        /*vbdHex(4, (int(top->count) >> 16) & 0xF);
         vbdHex(3, (int(top->count) >> 8) & 0xF);
         vbdHex(2, (int(top->count) >> 4) & 0xF);
-        vbdHex(1, int(top->count) >> 1 & 0xF);
+        vbdHex(1, int(top->count) >> 1 & 0xF);*/
         vbdCycle(i+1);
         
         //end of Vbuddy output section
