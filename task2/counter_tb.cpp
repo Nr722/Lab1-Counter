@@ -27,7 +27,7 @@ int main (int argc, char **argv, char **ev){
     top->en = 1;
     
     //run simulation for many clock cycles
-    for(i=0; i<200;i++){
+    for(i=0; i<400;i++){
 
         //dump variables into VCD file and toggle clock
         for(clk=0; clk<2; clk++){
@@ -37,7 +37,7 @@ int main (int argc, char **argv, char **ev){
             }
 
         // ++++ send count value to Vbuddy
-        vbdPlot(int(top->count), 0, 240);
+        vbdPlot(int(top->count), 0, 255);
         /*vbdHex(4, (int(top->count) >> 16) & 0xF);
         vbdHex(3, (int(top->count) >> 8) & 0xF);
         vbdHex(2, (int(top->count) >> 4) & 0xF);
@@ -48,6 +48,7 @@ int main (int argc, char **argv, char **ev){
 
         //change input stimuli
         top->en = vbdFlag();
+
         if (Verilated::gotFinish()) exit(0);
     }
 

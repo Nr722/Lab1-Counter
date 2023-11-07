@@ -1,4 +1,4 @@
-#include "Vcounter.h"
+//#include "Vcounter.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include "vbuddy.cpp"
@@ -25,18 +25,10 @@ int main (int argc, char **argv, char **ev){
     //initialize simulation inputs
     top->clk = 1;
     top->rst = 0;
-    top->ld = 0;
-    top->v = 100;
+    top->en = 1;
     //run simulation for many clock cycles
     for(i=0; i<200;i++){
-        
-        vbdSetMode(1);
-        if(vbdFlag()==1){
-            top->ld = 1; 
-        }
-        else{
-            top->ld = 0;
-        }
+
         //dump variables into VCD file and toggle clock
         for(clk=0; clk<2; clk++){
             tfp-> dump (2*i+clk);
@@ -45,15 +37,15 @@ int main (int argc, char **argv, char **ev){
             }
 
         // ++++ send count value to Vbuddy
-        vbdPlot(int(top->count), 0, 240);
-        vbdHex(4, (int(top->count) >> 16) & 0xF);
-        vbdHex(3, (int(top->count) >> 8) & 0xF);
-        vbdHex(2, (int(top->count) >> 4) & 0xF);
-        vbdHex(1, int(top->count) >> 1 & 0xF);
+
         vbdCycle(i+1);
         
         //end of Vbuddy output section
-
+        vbdHex(3, (int(top->bcd) >> 8) & 0xF);
+        vbdHex(2, (int(top->bcd) >> 4) & 0xF);
+        vbdHex(1, (int(top->bcd)) & 0xF);
+        
+        
         //change input stimuli
 
           if (Verilated::gotFinish()) exit(0);
