@@ -23,11 +23,14 @@ int main (int argc, char **argv, char **ev){
     vbdHeader("lab 1: Counter");
     //initialize simulation inputs
     top->clk = 1;
-    top->rst = 0;
+    top->rst = 1;
     top->en = 1;
     
     //run simulation for many clock cycles
-    for(i=0; i<400;i++){
+    for(i=0; i<100;i++){
+        if(i==1){
+            top->rst = 0;
+        }
 
         //dump variables into VCD file and toggle clock
         for(clk=0; clk<2; clk++){
@@ -56,5 +59,7 @@ int main (int argc, char **argv, char **ev){
     tfp->close();
     exit(0);
 }
+
+
 
 

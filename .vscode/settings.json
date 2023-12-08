@@ -1,3 +1,6 @@
 {
-    "files.eol": "\r"
+    "files.eol": "\r",
+    "files.associations": {
+        "xlocmes": "cpp"
+    }
 }

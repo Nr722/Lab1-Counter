@@ -31,7 +31,14 @@ int main (int argc, char **argv, char **ev){
             }
         top->rst = (i<2) | (i == 15);
         top->en = (i>4);
-        
+        if((top->count >=9) && (tmp<=2)){
+            tmp= tmp + 1;
+            top->en =0; 
+        }
+
+        else{
+            top->en =1;
+        }
         if (Verilated::gotFinish()) exit(0);
     }
     tfp->close();
